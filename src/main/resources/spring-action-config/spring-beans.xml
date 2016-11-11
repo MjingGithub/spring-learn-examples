@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	 xmlns:tx="http://www.springframework.org/schema/tx" 
+	 xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:amq="http://activemq.apache.org/schema/core"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee-2.5.xsd 
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-2.5.xsd
+	http://activemq.apache.org/schema/core
+	http://activemq.apache.org/schema/core/activemq-core-5.4.2.xsd"
+	default-lazy-init="true">
+	
+    <description>spring bean配置</description>
+	<bean id="companys" class="com.mj.springAction.Companys">
+		<constructor-arg ref="ordinaryMen" />
+	</bean>
+	<bean id="ordinaryMen" class="com.mj.springAction.OrdinaryMen"  autowire="byName">
+	<property name="name" value="xiaoming"/>
+	</bean>
+	<bean id="name" class="java.lang.String">  
+  		<constructor-arg index="0" value="xiaoming"/>  
+    </bean> 
+ 
+    <!--声明一个切面  --> 
+ <bean id="resting" class="com.mj.springAction.Resting" />
+    <aop:config>
+    	<aop:aspect ref="resting">
+    	<aop:pointcut expression="execution(* *.companyEarn(..))" id="work"/>
+    	<aop:before pointcut-ref="work" method="beforeWork"></aop:before>
+    	<aop:after pointcut-ref="work" method="afterWork"></aop:after>
+       </aop:aspect>
+    </aop:config>
+    
+</beans>

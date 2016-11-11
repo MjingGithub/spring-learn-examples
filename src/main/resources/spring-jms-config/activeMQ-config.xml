@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:jms="http://www.springframework.org/schema/jms"
+      xmlns:amq="http://activemq.apache.org/schema/core"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+      http://www.springframework.org/schema/jms
+      http://www.springframework.org/schema/jms/spring-jms-3.2.9.xsd
+      http://activemq.apache.org/schema/core
+	  http://activemq.apache.org/schema/core/activemq-core-5.4.2.xsd"
+	  default-lazy-init="true">
+	  
+	 <!--  <bean id="connectionFactory" 
+	      class="org.apache.activemq.spring.ActiveMQConnectionFactory">
+	      <property name="brokerURL" value="tcp://localhost:61616"/>
+	   </bean> -->
+	   <!-- 声明消息代理的位置 -->
+	   <amq:connectionFactory id="connectionFactory" 
+	   brokerURL="tcp://localhost:61616" />
+	   <!-- 声明ActiveMQ消息目的地-队列 -->
+	  <!--  <bean id="queue" class="org.apache.activemq.command.ActiveMQQueue">
+	  	 <constructor-arg value="spitter.queue"/>
+	   </bean> -->
+	   <amq:queue id="queue" physicalName="spitter.queue" />
+	   <!-- 声明ActiveMQ消息目的地-主题 -->
+	   <!-- <bean id="topic" class="org.apache.activemq.command.ActiveMQTopic">
+	  	 <constructor-arg value="spitter.topic"/>
+	   </bean> -->
+	   <amq:topic id="topic" physicalName="spitter.topic" />
+	  
+	  <!-- 声明JmsTemplate模板 ,指定默认目的地-->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestinationName" value="spittle.alert.queue" />
+	</bean>
+	<!--配置消息监听  -->
+	<bean id="msgListenerPojo" class="com.mj.springAction.activeMq.MsgListenerPojo" />
+	<jms:listener-container connection-factory="connectionFactory">
+		<jms:listener destination="spitter.alert.queue"
+			 ref="msgListenerPojo" method="processMessage" />
+	</jms:listener-container>
+      </beans>

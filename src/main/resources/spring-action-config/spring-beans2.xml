@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+	default-lazy-init="true">
+	<!--启用注解自动装配  -->
+	<context:annotation-config /> 
+
+	<bean id="sonnet29" class="com.mj.springAction.chapter2.SpringIdo1.Sonnet29" />
+
+	<bean id="jukePoem" class="com.mj.springAction.chapter2.SpringIdo1.JugglerPoem"
+	init-method="beforePerform" destroy-method="afterPerform" autowire="constructor">
+		<constructor-arg value="15" />
+	<!-- 	<constructor-arg ref="sonnet29" /> -->
+	</bean>
+	
+	<bean id="singleInstance" class="com.mj.springAction.chapter2.SpringIdo1.SingleStageInstance"
+	factory-method="getInstance" />
+
+<!-- <bean id="instrumentallist" class="com.mj.springAction.chapter2.SpringIdo1.Instrumentallist"
+	autowire="byName">
+	<property name="song" value="Bells" />
+	<property name="instrument" ref="saxophone"/>
+</bean>
+<bean id="instrument"  class="com.mj.springAction.chapter2.SpringIdo1.Saxophone" /> -->
+</beans>
