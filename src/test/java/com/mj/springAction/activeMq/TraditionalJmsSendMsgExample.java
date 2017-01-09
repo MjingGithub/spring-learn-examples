@@ -28,7 +28,7 @@ public class TraditionalJmsSendMsgExample {
 		try {
 			conn = cf.createConnection() ;
 			see = conn.createSession(false, Session.AUTO_ACKNOWLEDGE) ;
-			Destination dec = new ActiveMQQueue("spitter.queue") ;
+			Destination dec = new ActiveMQQueue("FirstQueue") ;
 			MessageProducer producer = see.createProducer(dec) ;
 			TextMessage message = see.createTextMessage() ;
 			message.setText("Hello World!");
