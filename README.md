@@ -8,9 +8,9 @@ some exercise when learn book "spring in action".
 - src/main/webapp/WEB-INF/web.xml web项目全局配置文件
 
 ## 包目录
-1. com.mj.springAction             // 根目录,下面包括了spring基本操做,包括自动注入...
-2. com.mj.springAction.activeMq          // spring结合activeMq使用的案例
-3. com.mj.springAction.activeMq.startDemo   //传统jms的消息发送
+- com.mj.springAction             // 根目录,下面包括了spring基本操做,包括自动注入...
+- com.mj.springAction.activeMq          // spring结合activeMq使用的案例
+- com.mj.springAction.activeMq.startDemo   //传统jms的消息发送
 ------------------------------------------------
 + 持续更新中.
 
