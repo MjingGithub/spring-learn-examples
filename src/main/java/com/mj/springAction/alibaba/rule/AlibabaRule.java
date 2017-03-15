@@ -1,5 +1,6 @@
 package com.mj.springAction.alibaba.rule;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -25,10 +26,9 @@ public class AlibabaRule {
 		//需做最后一个分隔符后有无内容的检查，否则会有抛IndexOutOfBoundsException的风险。
 		String str = "a,b,c,, ";
 		String[] ary = str.split(",");
-		//预期大于3，结果是3
+		//预期3，结果是5
 		System.out.println(ary.length); //5
 		
-		//会抛异常ConcurrentModificationException
 		List<String> a = new ArrayList<String>();
 		a.add("1");
 		a.add("2");
@@ -36,12 +36,13 @@ public class AlibabaRule {
 		a.add("4") ;
 		a.add("5") ;
 		a.add("1") ;
+		//会抛异常ConcurrentModificationException
 		/*for (String temp : a) {
 		if ("4".equals(temp)) {
 			a.remove(temp);
 			}
 		}*/
-		//正例
+		//正例,使用iterator迭代
 		Iterator<String> it = a.iterator();
 		while (it.hasNext()) {	
 			String temp = it.next();
@@ -71,5 +72,6 @@ public class AlibabaRule {
 		
 		//对于JDK8使用Map.foreach()
 		map.forEach((k,v)->System.out.println("key:"+k+",value:"+v));
+		
 	}
 }
