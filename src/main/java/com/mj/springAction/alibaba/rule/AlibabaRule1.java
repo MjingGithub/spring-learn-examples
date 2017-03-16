@@ -87,6 +87,14 @@ public class AlibabaRule1 {
 		/**
 		 * 多线程并行处理定时任务时，Timer运行多个TimeTask时，只要其中之一没有捕获抛出的异常，其它任务便会自动终止运行，
 		 * 使用ScheduledExecutorService则没有这个问题。
+		 * 
+		 */
+		
+		/**
+		 * 使用CountDownLatch进行异步转同步操作，每个线程退出前必须调用countDown方法，线程执行代码注意catch异常，
+		 * 确保countDown方法可以执行，避免主线程无法执行至await方法，直到超时才返回结果。 
+		 * 说明：注意，子线程抛出异常堆栈，不能在主线程try-catch到。
+		 * http://bastengao.com/blog/2014/03/from-asycn-to-sync-in-java.html
 		 */
 	}
 
